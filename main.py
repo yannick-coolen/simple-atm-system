@@ -18,7 +18,6 @@ def atm():
                     attempts -= 1
                     if attempts < 1:
                         print("Access denied, Your pin card has been blocked")
-                        using_service = True
                     else:
                         print(f"Try again, you have {attempts} attempts")
                         continue
