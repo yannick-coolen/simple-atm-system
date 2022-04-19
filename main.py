@@ -10,11 +10,8 @@ def atm():
         pin = input("--->: ")
         print("----" * 8)
         if pin.isdigit():
-            if len(pin) > 4:
-                print("Input is too long. Only 4 digits is allowed")
-                continue
-            elif len(pin) <= 3:
-                print("Input is too short. Only 4 digits is allowed")
+            if len(pin) != 4:
+                print("Invalid input. Only 4 digits is allowed")
                 continue
             else:
                 if pin != str(pincode):
