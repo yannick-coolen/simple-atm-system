@@ -50,6 +50,7 @@ def selection_input(budget, insufficient, current_service):
             if selection == 1:
                 # Run func check_amount
                 check_amount(budget, insufficient, current_service)
+                current_service = True
             elif selection == 2:
                 try:
                     amount_val = int(input("How much would you like to deposit: "))
@@ -68,7 +69,7 @@ def selection_input(budget, insufficient, current_service):
                       f"{budget} euro.\n")
                 print("Would you like to proceed?\nWrite down \"Y\" for yes or \"N\" for no.")
                 while not current_service:
-                    answer = input("-->: ")
+                    answer = input("--->: ")
                     if yes.lower() in answer:
                         service(budget, current_service)
                     elif no.lower() in answer:
@@ -85,6 +86,7 @@ def selection_input(budget, insufficient, current_service):
                                   "\n"
                                   "Please try again")
                             continue
+                    current_service = True
             elif selection == 4:
                 print("Process has been stopped. Thank you for coming")
                 current_service = True
@@ -94,20 +96,24 @@ def selection_input(budget, insufficient, current_service):
         except ValueError:
             print("Invalid input. Please enter a number between 1 and 5")
             continue
+        current_service = True
 
 
 def check_amount(budget, insufficient, current_service):
     print("How much would you like too withdraw")
     while not insufficient:
         print("----" * 9)
-        amount_val = int(input("--->: "))
-
-        if amount_val > budget:
-            print(f"Insufficient amount please choose lower than or equal as {budget}")
+        try:
+            amount_val = int(input("--->: "))
+            if amount_val > budget:
+                print(f"Insufficient amount please choose lower than or equal as {budget}")
+                continue
+            else:
+                receipt(amount_val, current_service)
+                current_service = True
+        except ValueError:
+            print("Invalid value. Please enter a valid value")
             continue
-        else:
-            receipt(amount_val, current_service)
-            current_service = True
         insufficient = True
 
 
